@@ -1,0 +1,42 @@
+!!!
+%html{:lang => "en"}
+	%head
+		%meta{:charset => "utf-8"}
+		%meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+		%title=title
+		= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+		= javascript_include_tag "vendor/modernizr"
+		= javascript_include_tag "application", "data-turbolinks-track" => true
+		= javascript_include_tag controller.controller_name  if Rails.application.assets.find_asset "#{controller.controller_name}.js"
+		= csrf_meta_tags
+		%link{:rel => "shortcut icon", :href => "#{asset_path 'favicon.png'}"}
+		%link{:rel => "icon", :href => "#{asset_path 'favicon.png'}"}
+		=render "layouts/shim"
+	%body
+		.row.small-collapse
+			.columns.small-12
+				.off-canvas-wrap{:data => {:offcanvas => ""}}
+					.inner-wrap
+						%header
+							%nav.tab-bar
+								%section.left-small
+									%a.left-off-canvas-toggle.menu-icon{:href => "#"}
+										%span
+								%section.middle.tab-bar-section
+									%h1.title P.S.
+								%section.right.text-center
+									%button.button.small{:data => {:dropdown => "drop"}, :aria => {:controls => "drop4"}, :aria => {:expanded => "false"}, :style => "margin:0;float:right;background:none;"}
+										%i.fi-torso{:style => "font-size:16px;"}
+						%main
+							=render 'layouts/messages'
+							=yield
+						%footer
+							=render "layouts/footer"
+						%aside.left-off-canvas-menu
+							%ul.off-canvas-list
+								%li 
+									%label Account
+								%li
+									%a Saved Bathrooms
+						%a.exit-off-canvas
+=debug(params) if Rails.env.development?
