@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   private
     def foursquare
-      Foursquare2::Client.new(:client_id => Settings.app_id, :client_secret => Settings.app_secret, :api_version => "20150101")
+      Foursquare2::Client.new(:client_id => Settings.app_id, :client_secret => Settings.app_secret, :api_version => "20150101", :oath_token => Settings.foursquare_access_token)
     end
-
+    
 end
