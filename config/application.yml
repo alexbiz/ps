@@ -1,0 +1,13 @@
+defaults: &defaults
+  app_id: LRPNGUSG4JFFHAS1VDT1CRAXDJNAFJOAKUS3IHNJQIL1J3WR
+  app_secret: RRBK4ZTBOF2YLOQWTHNCGCR0TKJ2EICPTQACELTAVGTREQPD
+  google_api: AIzaSyANOpDIGixjRHR5B_r-5eW-ZT6m5H8oAz8
+  
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

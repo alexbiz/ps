@@ -9,6 +9,10 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = javascript_include_tag controller.controller_name  if Rails.application.assets.find_asset "#{controller.controller_name}.js"
     = csrf_meta_tags
+    %script{src:"//maps.google.com/maps/api/js?v=3.18&sensor=false&client=&key=&libraries=geometry&language=&hl=&region="}
+    %script{src:"//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"}
+    %script{src:'//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js', type: 'text/javascript'}
+    
     %link{:rel => "shortcut icon", :href => "#{asset_path 'favicon.png'}"}
     %link{:rel => "icon", :href => "#{asset_path 'favicon.png'}"}
     =render "layouts/shim"
@@ -25,10 +29,6 @@
             %footer
               =render "layouts/footer"
             %aside.left-off-canvas-menu
-              %ul.off-canvas-list
-                %li 
-                  %label Account
-                %li
-                  %a Saved Bathrooms
-              %a.exit-off-canvas
+              =render 'layouts/off_canvas'
+            %a.exit-off-canvas
 =debug(params) if Rails.env.development?

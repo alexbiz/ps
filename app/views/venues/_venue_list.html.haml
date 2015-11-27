@@ -1,0 +1,12 @@
+%table
+  %thead
+    %tr
+      %th Name
+      %th Location
+      %th Check-Ins
+  %tbody
+    -@venues.each do |v|
+      %tr
+        %td=v.name
+        %td=v.location.formattedAddress.join(" ")
+        %th=v.stats.checkinsCount

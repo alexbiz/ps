@@ -1,1 +1,46 @@
-%h1 PS Homepage
+.row.full-width
+  .large-6.columns.small-12.columns
+    .map#map{:style => "width:100%;height:800px;"}
+  .large-6.columns.small-12.columns
+    #venue_list
+      =render 'venues/venue_list', :venues => @venues
+
+:javascript
+  var lat = "#{@lat}";
+  var lng = "#{@lng}";
+  if (navigator.geolocation) {
+     var timeoutVal = 10 * 1000 * 1000;
+     var position_object = navigator.geolocation.getCurrentPosition(
+       plotMap,
+       reloadWindow
+     );
+     
+   } else {
+     alert("Geolocation is not supported by this browser");
+   }
+  
+  function reloadWindow(position){
+    if(window.location.href.indexOf("?")==-1){
+        window.location.href = window.location.pathname+"?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude;
+    }
+  }
+  
+  function plotMap(position){
+      handler = Gmaps.build('Google');
+      handler.buildMap({ 
+        provider: {
+          disableDefaultUI: true,
+          center: {lat: #{@lat}, lng: #{@lng}},
+          zoom: 11
+        },
+        internal: {
+          id: 'map'
+        }
+      },
+      function(){
+        markers = handler.addMarkers(#{@markers.to_json});
+        //handler.bounds.extendWith(markers);
+        //handler.fitMapToBounds();
+      }
+    );
+  }
